@@ -1,10 +1,31 @@
 package main
 
-import {
+import (
     "fmt"
     "log"
     "os"
     "path/filepath"
+)
+
+func main(){
+    if len(os.Args) == 1 {
+        fmt.Printf("Usage: %s <whole-number>\n", filepath.Base( os.Args[0] ))
+        os.Exit(1)
+    }
+
+    stringOfDigits := os.Args[1]
+    for row := range bigDigits[0] {
+	line := ""
+	for column := range stringOfDigits {
+		digit := stringOfDigits[column] - '0'
+		if 0 <= digit && digit <= 9 {
+			line += bigDigits[digit][row] + "  "
+		} else {
+			log.Fatal("Invalid whole number")
+		}
+	}
+	fmt.Println(line)
+    }
 }
 
 var bigDigits = [][]string{
@@ -77,6 +98,5 @@ var bigDigits = [][]string{
      " 9999",
      "    9",
      "    9",
-     "    9"}
-}
+     "    9"}}
 
